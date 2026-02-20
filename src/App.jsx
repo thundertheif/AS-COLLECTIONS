@@ -7,7 +7,7 @@ import Footer from "./components/Footer";
 // Pages
 import Home from "./pages/Home";
 import Sarees from "./pages/Sarees";
-import Tops from "./pages/Tops";
+import Tops from "./pages/tops";
 import Kurtis from "./pages/Kurtis";
 import Cart from "./pages/Cart";
 import DesignerMaterials from "./pages/DesignerMaterials";
@@ -48,7 +48,7 @@ function LayoutWrapper() {
         <Route path="/designer" element={<DesignerMaterials />} />
         <Route path="/sale" element={<Sale />} />
         <Route path="/wishlist" element={<Wishlist />} />
-      </Routes> 
+
         {/* Auth */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
