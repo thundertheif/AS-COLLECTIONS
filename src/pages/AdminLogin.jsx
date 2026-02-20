@@ -1,89 +1,56 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./AdminLogin.css"; // optional CSS file
 
 export default function AdminLogin() {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const [error, setError] = useState("");
+
+  // Dummy Admin Credentials (change later)
+  const ADMIN_USER = "admin";
+  const ADMIN_PASS = "1234";
 
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // TEMP ADMIN LOGIN (Change later)
-    if (username === "admin" && password === "1234") {
+    if (username === ADMIN_USER && password === ADMIN_PASS) {
       localStorage.setItem("adminLoggedIn", "true");
-      alert("Admin Login Success!");
-      navigate("/admin");
+      navigate("/admin-dashboard"); // change route if needed
     } else {
-      alert("Wrong Admin Credentials!");
+      setError("❌ Invalid Username or Password");
     }
   };
 
   return (
-    <div style={box}>
-      <h2>AS COLLECTIONS Admin Login</h2>
+    <div className="admin-login-container">
+      <div className="admin-login-box">
+        <h2>Admin Login</h2>
 
-      <form onSubmit={handleLogin} style={form}>
-        <input
-          placeholder="Admin Username"
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button>Login</button>
-      </form>
+        {error && <p className="error-msg">{error}</p>}
 
-      <p>Default Admin: admin / 1234</p>
+        <form onSubmit={handleLogin}>
+          <input
+            type="text"
+            placeholder="Admin Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+
+          <input
+            type="password"
+            placeholder="Admin Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <button type="submit">Login</button>
+        </form>
+      </div>
     </div>
   );
 }
-
-const box = { display: "flex", flexDirection: "column", alignItems: "center", marginTop: 100 };
-const form = { display: "grid", gap: 10, width: 300 };
-
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-export default function AdminLogin() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-
-    // TEMP ADMIN LOGIN (Change later)
-    if (username === "admin" && password === "1234") {
-      localStorage.setItem("adminLoggedIn", "true");
-      alert("Admin Login Success!");
-      navigate("/admin");
-    } else {
-      alert("Wrong Admin Credentials!");
-    }
-  };
-
-  return (
-    <div style={box}>
-      <h2>AS COLLECTIONS Admin Login</h2>
-
-      <form onSubmit={handleLogin} style={form}>
-        <input
-          placeholder="Admin Username"
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button>Login</button>
-      </form>
-
-      <p>Default Admin: admin / 1234</p>
-    </div>
-  );
-}
-

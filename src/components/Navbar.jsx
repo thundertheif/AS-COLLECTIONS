@@ -1,83 +1,50 @@
+import { Link } from "react-router-dom";
+import "./Navbar.css";
+import logo from "../assets/images/ASC.jpg";
 
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+export default function Navbar() {
+  const loggedIn = localStorage.getItem("loggedIn");
 
-// Components
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-
-// Customer Pages
-import Home from "./pages/Home";
-import Sarees from "./pages/Sarees";
-import Tops from "./pages/Tops";
-import Kurtis from "./pages/Kurtis";
-import Cart from "./pages/Cart";
-import DesignerMaterials from "./pages/DesignerMaterials";
-import Sale from "./pages/Sale";
-import Wishlist from "./pages/Wishlist";
-
-// Customer Auth
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-
-// Admin Auth & Pages
-import AdminLogin from "./pages/AdminLogin";
-import ProtectedAdmin from "./pages/admin/ProtectedAdmin";
-import AdminLayout from "./pages/admin/AdminLayout";
-import Dashboard from "./pages/admin/Dashboard";
-import Products from "./pages/admin/Products";
-import Orders from "./pages/admin/Orders";
-import Settings from "./pages/admin/Settings";
-
-// Layout Wrapper
-function LayoutWrapper() {
-  const location = useLocation();
-
-  // Hide navbar & footer only inside admin panel (not admin-login)
-  const isAdminPanel = location.pathname.startsWith("/admin") && location.pathname !== "/admin-login";
+  const handleLogout = () => {
+    localStorage.removeItem("loggedIn");
+    window.location.reload();
+  };
 
   return (
-    <>
-      {/* Navbar only for customer website */}
-      {!isAdminPanel && <Navbar />}
+    <header className="nav-main">
+      <div className="nav-top">
+        <Link to="/" className="logo-container">
+          <img src={logo} alt="AS COLLECTIONS" className="logo-img" />
+          <span className="logo-text">AS COLLECTIONS</span>
+        </Link>
 
-      <Routes>
-        {/* ================= CUSTOMER WEBSITE ================= */}
-        <Route path="/" element={<Home />} />
-        <Route path="/sarees" element={<Sarees />} />
-        <Route path="/tops" element={<Tops />} />
-        <Route path="/kurtis" element={<Kurtis />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/designer" element={<DesignerMaterials />} />
-        <Route path="/sale" element={<Sale />} />
-        <Route path="/wishlist" element={<Wishlist />} />
+        <div className="search-box">
+          <input type="text" placeholder="Search sarees, kurtis, tops..." />
+          <button>🔍</button>
+        </div>
 
-        {/* CUSTOMER LOGIN / SIGNUP */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <div className="nav-icons">
+          <Link to="/wishlist">❤️ Wishlist</Link>
+          <Link to="/cart">🛒 Cart</Link>
 
-        {/* Admin Login */}
-<Route path="/admin-login" element={<AdminLogin />} />
+          {!loggedIn ? (
+            <>
+              <Link to="/login">Login</Link>
+              <Link to="/signup">Signup</Link>
+            </>
+          ) : (
+            <button onClick={handleLogout}>Logout</button>
+          )}
+        </div>
+      </div>
 
-{/* Protected Admin Panel */}
-<Route path="/admin" element={<ProtectedAdmin />}>
-  <Route element={<AdminLayout />}>
-    <Route path="dashboard" element={<Dashboard />} />
-    <Route path="products" element={<Products />} />
-    <Route path="settings" element={<Settings />} />
-  </Route>
-</Route>
-
-      {/* Footer only for customer website */}
-      {!isAdminPanel && <Footer />}
-    </>
+      <nav className="nav-menu">
+        <Link to="/sarees">Sarees</Link>
+        <Link to="/tops">Tops</Link>
+        <Link to="/kurtis">Kurtis</Link>
+        <Link to="/designer">Designer</Link>
+        <Link to="/sale">SALE</Link>
+      </nav>
+    </header>
   );
 }
-
-// Main App
-export default function App() {
-  return (
-    <BrowserRouter>
-      <LayoutWrapper />
-    </BrowserRouter>
-  );
-}                      

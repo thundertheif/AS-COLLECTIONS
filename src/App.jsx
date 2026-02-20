@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
-// Customer Pages
+// Pages
 import Home from "./pages/Home";
 import Sarees from "./pages/Sarees";
 import Tops from "./pages/Tops";
@@ -14,11 +14,11 @@ import DesignerMaterials from "./pages/DesignerMaterials";
 import Sale from "./pages/Sale";
 import Wishlist from "./pages/Wishlist";
 
-// Customer Auth
+// Auth
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
-// Admin Pages
+// Admin
 import AdminLogin from "./pages/AdminLogin";
 import ProtectedAdmin from "./pages/admin/ProtectedAdmin";
 import AdminLayout from "./pages/admin/AdminLayout";
@@ -27,22 +27,19 @@ import Products from "./pages/admin/Products";
 import Orders from "./pages/admin/Orders";
 import Settings from "./pages/admin/Settings";
 
-// Layout Wrapper
 function LayoutWrapper() {
   const location = useLocation();
 
-  // Hide navbar/footer only in admin panel
   const isAdminPanel =
     location.pathname.startsWith("/admin") &&
     location.pathname !== "/admin-login";
 
   return (
     <>
-      {/* Navbar for customer pages */}
       {!isAdminPanel && <Navbar />}
 
       <Routes>
-        {/* ================= CUSTOMER WEBSITE ================= */}
+        {/* Customer Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/sarees" element={<Sarees />} />
         <Route path="/tops" element={<Tops />} />
@@ -51,31 +48,35 @@ function LayoutWrapper() {
         <Route path="/designer" element={<DesignerMaterials />} />
         <Route path="/sale" element={<Sale />} />
         <Route path="/wishlist" element={<Wishlist />} />
-
-        {/* CUSTOMER LOGIN */}
+      </Routes> 
+        {/* Auth */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
-      {/* Admin Login */}
-<Route path="/admin-login" element={<AdminLogin />} />
+        {/* Admin Login */}
+        <Route path="/admin-login" element={<AdminLogin />} />
 
-{/* Protected Admin Panel */}
-<Route path="/admin" element={<ProtectedAdmin />}>
-  <Route element={<AdminLayout />}>
-    <Route path="dashboard" element={<Dashboard />} />
-    <Route path="products" element={<Products />} />
-    <Route path="settings" element={<Settings />} />
-  </Route>
-</Route>
+        {/* Protected Admin Panel */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedAdmin>
+              <AdminLayout />
+            </ProtectedAdmin>
+          }
+        >
+          <Route index element={<Dashboard />} />
+          <Route path="products" element={<Products />} />
+          <Route path="orders" element={<Orders />} />
+          <Route path="settings" element={<Settings />} />
+        </Route>
+      </Routes>
 
-
-      {/* Footer for customer pages */}
       {!isAdminPanel && <Footer />}
     </>
   );
 }
 
-// Main App
 export default function App() {
   return (
     <BrowserRouter>
