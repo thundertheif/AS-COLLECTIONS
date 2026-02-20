@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 // Components
@@ -18,7 +19,7 @@ import Wishlist from "./pages/Wishlist";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
-// Admin Pages
+// Admin Auth & Pages
 import AdminLogin from "./pages/AdminLogin";
 import ProtectedAdmin from "./pages/admin/ProtectedAdmin";
 import AdminLayout from "./pages/admin/AdminLayout";
@@ -31,14 +32,12 @@ import Settings from "./pages/admin/Settings";
 function LayoutWrapper() {
   const location = useLocation();
 
-  // Hide navbar/footer only in admin panel
-  const isAdminPanel =
-    location.pathname.startsWith("/admin") &&
-    location.pathname !== "/admin-login";
+  // Hide navbar & footer only inside admin panel (not admin-login)
+  const isAdminPanel = location.pathname.startsWith("/admin") && location.pathname !== "/admin-login";
 
   return (
     <>
-      {/* Navbar for customer pages */}
+      {/* Navbar only for customer website */}
       {!isAdminPanel && <Navbar />}
 
       <Routes>
@@ -52,30 +51,23 @@ function LayoutWrapper() {
         <Route path="/sale" element={<Sale />} />
         <Route path="/wishlist" element={<Wishlist />} />
 
-        {/* CUSTOMER LOGIN */}
+        {/* CUSTOMER LOGIN / SIGNUP */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
-        {/* ADMIN LOGIN */}
-        <Route path="/admin-login" element={<AdminLogin />} />
+        {/* Admin Login */}
+<Route path="/admin-login" element={<AdminLogin />} />
 
-        {/* ================= ADMIN PANEL (PROTECTED) ================= */}
-        <Route
-          path="/admin"
-          element={
-            <ProtectedAdmin>
-              <AdminLayout />
-            </ProtectedAdmin>
-          }
-        >
-          <Route index element={<Dashboard />} />
-          <Route path="products" element={<Products />} />
-          <Route path="orders" element={<Orders />} />
-          <Route path="settings" element={<Settings />} />
-        </Route>
-      </Routes>
+{/* Protected Admin Panel */}
+<Route path="/admin" element={<ProtectedAdmin />}>
+  <Route element={<AdminLayout />}>
+    <Route path="dashboard" element={<Dashboard />} />
+    <Route path="products" element={<Products />} />
+    <Route path="settings" element={<Settings />} />
+  </Route>
+</Route>
 
-      {/* Footer for customer pages */}
+      {/* Footer only for customer website */}
       {!isAdminPanel && <Footer />}
     </>
   );
@@ -88,5 +80,4 @@ export default function App() {
       <LayoutWrapper />
     </BrowserRouter>
   );
-}
-
+}                      
