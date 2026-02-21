@@ -47,4 +47,6 @@ export default function Navbar() {
       </nav>
     </header>
   );
+
 }
+

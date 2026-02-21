@@ -3,7 +3,7 @@ import ProductsGrid from "../components/ProductsGrid";
 import "../styles/Tops.css";
 
 export default function Tops() {
-  return (
+  return (  
     <div className="tops-page">
       
       {/* Page Header */}
