@@ -13,6 +13,7 @@ import Cart from "./pages/Cart";
 import DesignerMaterials from "./pages/DesignerMaterials";
 import Sale from "./pages/Sale";
 import Wishlist from "./pages/Wishlist";
+import Login from "./pages/Login";
 
 // Auth
 import Login from "./pages/Login";
@@ -48,7 +49,7 @@ function LayoutWrapper() {
         <Route path="/designer" element={<DesignerMaterials />} />
         <Route path="/sale" element={<Sale />} />
         <Route path="/wishlist" element={<Wishlist />} />
-
+         
         {/* Auth */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
