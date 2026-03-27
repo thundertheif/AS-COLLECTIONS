@@ -1,0 +1,167 @@
+.promo-banner {
+  background: linear-gradient(135deg, #fff5e6 0%, #ffe4cc 100%);
+  padding: 20px 40px;
+  margin: 10px 0;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.promo-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff6b6b' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.3;
+}
+
+.banner-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.banner-left {
+  flex: 1;
+}
+
+.discount-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #282c3f;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+}
+
+.discount-title .highlight {
+  color: #ff6b6b;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.discount-subtitle {
+  font-size: 1.5rem;
+  color: #535766;
+  margin: 0;
+  font-weight: 600;
+}
+
+.banner-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.coupon-box {
+  background: white;
+  padding: 15px 40px;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 2px dashed #ff6b6b;
+}
+
+.coupon-label {
+  font-size: 0.75rem;
+  color: #7b8089;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+.coupon-code {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #282c3f;
+  letter-spacing: 2px;
+}
+
+.banner-right {
+  flex: 0.5;
+  display: flex;
+  justify-content: center;
+}
+
+.percentage-icon {
+  font-size: 4rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transform: rotate(-15deg);
+}
+
+.banner-footer {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.banner-footer p {
+  font-size: 0.85rem;
+  color: #7b8089;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .promo-banner {
+    padding: 20px;
+  }
+  
+  .banner-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .banner-left,
+  .banner-center,
+  .banner-right {
+    flex: none;
+    width: 100%;
+  }
+  
+  .discount-title {
+    font-size: 2rem;
+  }
+  
+  .discount-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .coupon-box {
+    margin: 15px 0;
+    padding: 12px 30px;
+  }
+  
+  .coupon-code {
+    font-size: 1.5rem;
+  }
+  
+  .percentage-icon {
+    font-size: 3rem;
+    margin: 10px 0;
+  }
+  
+  .banner-footer {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    margin-top: 10px;
+  }
+}
